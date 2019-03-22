@@ -1,0 +1,38 @@
+@model NewActivity
+
+<div class="header">
+<h1>Dojo Activity Center</h1>
+<a href="/logout">Log off</a>
+</div>
+
+<h1>@ViewBag.act.Title</h1>
+
+@{
+    bool temp = false;
+    foreach(var something in @ViewBag.act.ActtoUser)
+        {   
+            if ( @ViewBag.Userid == @something.User.UserId)
+            {
+             temp = true;
+            }
+        }
+        if (temp ==false)
+        {
+            <a href="/joinact/@ViewBag.act.ActivityId/@ViewBag.Userid"><button>Join</button></a>
+        }
+        else
+        {
+            <a>You Joined</a>
+        }
+}
+
+<h3>Event Coordinator: @ViewBag.theuser.FirstName</h3>
+<h3>Description</h3>
+<p>@ViewBag.act.Description</p>
+<h3>Participants:</h3>
+<ul>
+    @foreach(var people in ViewBag.act.ActtoUser){
+    <li>@people.User.FirstName</li>
+    }
+    
+</ul>
